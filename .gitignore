@@ -15,9 +15,6 @@
 /system/config/localconfig.php
 /var/
 
-# Skip files
-/system/modules/*/.skip
-
 # ========================================
 # Custom: Only track specific theme files
 # ========================================

@@ -8,3 +8,25 @@
     
     {{ parent() }}
 {% endblock %}
+
+{% block body_content %}
+    {% slot header %}
+        <header>
+            {% slot logo %}
+                <div class="logo">{{ slot() }}</div>
+            {% endslot %}
+            
+            {% slot navigation %}
+                <nav>{{ slot() }}</nav>
+            {% endslot %}
+        </header>
+    {% endslot %}
+
+    {% slot main %}
+        <main>{{ slot() }}</main>
+    {% endslot %}
+
+    {% slot footer %}
+        <footer>{{ slot() }}</footer>
+    {% endslot %}
+{% endblock %}

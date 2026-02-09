@@ -2,12 +2,11 @@
 
 {# Custom Page Layout Template for Contao 5.7 #}
 
-{% block end_of_head %}
-    {# Custom Stylesheet #}
-    <link rel="stylesheet" href="{{ asset('files/theme/css/theme.css') }}">
-    
+{% block stylesheets %}
     {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('files/theme/css/theme.css') }}">
 {% endblock %}
+
 {% block body %}
     {% block body_content %}
         {% slot header %}

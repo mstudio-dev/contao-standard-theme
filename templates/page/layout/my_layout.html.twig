@@ -2,7 +2,7 @@
 
 {# Custom Page Layout Template for Contao 5.7 #}
 
-{% block stylesheets %}
+{% block end_of_head %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('files/theme/css/theme.css') }}">
 {% endblock %}

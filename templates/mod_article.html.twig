@@ -20,9 +20,7 @@
 
 {% elseif noMarkup|default %}
 
-    {% block content %}
-        {{ elements|join|raw }}
-    {% endblock %}
+    {{ elements|join|raw }}
 
 {% else %}
 
@@ -46,7 +44,9 @@
         {% endif %}
 
         <div class="inside">
-            {{ block('content') }}
+            {% block content %}
+                {{ elements|join|raw }}
+            {% endblock %}
         </div>
 
         {% if backlink %}

@@ -34,3 +34,6 @@
 /templates/page/*
 !/templates/page/layout/
 !/templates/page/layout/my_layout.html.twig
+
+# And track custom module templates
+!/templates/mod_article.html.twig

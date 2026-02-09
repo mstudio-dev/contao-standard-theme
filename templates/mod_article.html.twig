@@ -45,7 +45,9 @@
             {% endblock %}
         {% endif %}
 
-        {{ block('content') }}
+        <div class="inside">
+            {{ block('content') }}
+        </div>
 
         {% if backlink %}
             {% block backlink %}

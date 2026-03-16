@@ -147,3 +147,413 @@ footer {
     background: var(--secondary);
     color: var(--on-primary);
 }
+
+/* =========================================================
+   CONTAO-SPECIFIC LAYOUT
+   ========================================================= */
+
+/* .inside: inner wrapper used in block_section, mod_article, layout slots */
+.inside {
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: var(--spacing);
+}
+
+header .inside,
+footer .inside {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+
+    @media (width < 768px) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* =========================================================
+   NAVIGATION (nav_default.html.twig)
+   ========================================================= */
+
+/* Multi-level nav lists */
+nav ul.level_1,
+nav ul.level_2,
+nav ul.level_3 {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav ul.level_1 {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+
+    @media (width < 768px) {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+}
+
+nav ul.level_2 {
+    display: none;
+    position: absolute;
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 0.5rem 0;
+    min-width: 180px;
+    z-index: 50;
+}
+
+nav li {
+    position: relative;
+
+    &:hover > ul.level_2 {
+        display: block;
+    }
+
+    & a,
+    & strong {
+        display: block;
+        padding: 0.4rem 0.75rem;
+        color: var(--on-primary);
+        text-decoration: none;
+        border-radius: var(--radius);
+        transition: opacity var(--transition);
+        font-weight: inherit;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    /* Active page marker (nav_default uses <strong aria-current="page">) */
+    & strong[aria-current="page"] {
+        font-weight: 700;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+    }
+
+    /* trail = ancestor of current page */
+    &.trail > a,
+    &.trail > strong {
+        opacity: 0.85;
+    }
+
+    /* level_2 links use surface colors */
+    & ul.level_2 a,
+    & ul.level_2 strong {
+        color: var(--on-surface);
+    }
+}
+
+/* =========================================================
+   FRONTEND MODULES (frontend_module/_base.html.twig)
+   module class = "module-{type}" e.g. module-navigation
+   ========================================================= */
+
+[class^="module-"],
+[class*=" module-"] {
+    margin-block-end: 2rem;
+}
+
+.module-navigation nav {
+    flex: unset;
+}
+
+.module-breadcrumb nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+    flex-direction: row;
+
+    & li {
+        color: var(--on-surface);
+        font-size: 0.875rem;
+
+        &:not(:last-child)::after {
+            content: '›';
+            margin-inline-start: 0.5rem;
+            color: var(--border-color);
+        }
+
+        &.active {
+            font-weight: 700;
+        }
+
+        & a {
+            color: var(--primary);
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+/* =========================================================
+   CONTENT ELEMENTS (content_element/_base.html.twig)
+   class = "content-{type}" e.g. content-text, content-image
+   ========================================================= */
+
+[class^="content-"],
+[class*=" content-"] {
+    margin-block-end: 1.5rem;
+}
+
+.content-headline {
+    margin-block-end: 0.5rem;
+}
+
+.content-image figure {
+    margin: 0 0 1rem 0;
+
+    & figcaption {
+        font-size: 0.875rem;
+        color: var(--secondary);
+        padding-block-start: 0.5rem;
+    }
+}
+
+.content-image img,
+.content-gallery img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+}
+
+.content-gallery .images {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--spacing);
+}
+
+.content-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-block: var(--spacing);
+
+    & th,
+    & td {
+        padding: 0.5rem 0.75rem;
+        text-align: left;
+        border-block-end: 1px solid var(--border-color);
+    }
+
+    & th {
+        background: var(--surface-variant);
+        font-weight: 700;
+    }
+
+    & tr:hover td {
+        background: var(--surface-variant);
+    }
+}
+
+.content-code pre {
+    background: var(--surface-variant);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 1rem;
+    overflow-x: auto;
+    font-size: 0.875rem;
+}
+
+.content-download a,
+.content-downloads a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary);
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+/* =========================================================
+   SYNDICATION (mod_article.html.twig print/share buttons)
+   ========================================================= */
+
+.syndication {
+    display: flex;
+    gap: 0.75rem;
+    margin-block-end: 1rem;
+
+    & a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        padding: 0.35rem 0.75rem;
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius);
+        font-size: 0.8rem;
+        color: var(--on-surface);
+        text-decoration: none;
+        transition: background var(--transition);
+
+        &:hover {
+            background: var(--surface-variant);
+        }
+    }
+}
+
+/* =========================================================
+   PAGINATION (component/_pagination.html.twig)
+   ========================================================= */
+
+nav.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-block: 2rem;
+    flex-wrap: wrap;
+
+    & a,
+    & strong {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 2.25rem;
+        height: 2.25rem;
+        padding: 0 0.5rem;
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius);
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 500;
+        transition: background var(--transition);
+
+        &:hover {
+            background: var(--surface-variant);
+        }
+    }
+
+    & strong {
+        background: var(--primary);
+        color: var(--on-primary);
+        border-color: var(--primary);
+    }
+
+    & .first,
+    & .last,
+    & .previous,
+    & .next {
+        font-size: 0.875rem;
+    }
+}
+
+/* =========================================================
+   FORMS (.formbody used by Contao form module)
+   ========================================================= */
+
+.formbody {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 600px;
+
+    & label {
+        display: block;
+        font-weight: 600;
+        margin-block-end: 0.25rem;
+    }
+
+    & :is(input[type="text"],
+          input[type="email"],
+          input[type="tel"],
+          input[type="password"],
+          input[type="search"],
+          textarea,
+          select) {
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius);
+        font: inherit;
+        background: var(--surface);
+        color: var(--on-surface);
+        transition: border-color var(--transition);
+
+        &:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+            border-color: var(--primary);
+        }
+    }
+
+    & .submit_container {
+        margin-block-start: 0.5rem;
+    }
+
+    & button,
+    & input[type="submit"] {
+        padding: 0.6rem 1.5rem;
+        background: var(--primary);
+        color: var(--on-primary);
+        border: none;
+        border-radius: var(--radius);
+        font: inherit;
+        font-weight: 600;
+        cursor: pointer;
+        transition: opacity var(--transition);
+
+        &:hover {
+            opacity: 0.85;
+        }
+    }
+
+    & .error {
+        color: oklch(0.55 0.2 25);
+        font-size: 0.875rem;
+    }
+}
+
+/* =========================================================
+   TYPOGRAPHY
+   ========================================================= */
+
+:is(h1, h2, h3, h4, h5, h6) {
+    line-height: 1.25;
+    margin-block: 1.5rem 0.5rem;
+    color: var(--on-surface);
+}
+
+h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+h2 { font-size: clamp(1.4rem, 3vw, 2rem); }
+h3 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); }
+h4 { font-size: 1.2rem; }
+h5 { font-size: 1.1rem; }
+h6 { font-size: 1rem; }
+
+p { margin-block-end: 1rem; }
+
+a {
+    color: var(--primary);
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+/* =========================================================
+   PRINT
+   ========================================================= */
+
+@media print {
+    :is(header, footer, .syndication, nav, .no-print) {
+        display: none;
+    }
+
+    a[href^="http"]::after {
+        content: ' (' attr(href) ')';
+        font-size: 0.8em;
+    }
+}

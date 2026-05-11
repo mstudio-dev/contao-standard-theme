@@ -96,19 +96,7 @@
   }
 
   /* ── Touch-Targets ───────────────────────────────────────────────────────── */
-
-  /* Sicherheitsnetz: alle interaktiven Elemente min. 44×44 px */
-  a,
-  button,
-  [role="button"],
-  [role="link"],
-  input[type="submit"],
-  input[type="button"],
-  input[type="reset"],
-  label[for] {
-    /* min-height über min-height-property, nicht per padding hier */
-    /* Konkrete Werte in den Komponenten (03-components.css) */
-  }
+  /* Konkrete min-height-Werte (44×44 px) sind in 03-components.css gesetzt.   */
 
   /* Pseudo-Element-Erweiterung für kleine Icons/Links */
   .touch-target-extend {
@@ -149,12 +137,6 @@
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
-  }
-
-  /* ── Fokus-Trap (Modal) ──────────────────────────────────────────────────── */
-
-  [data-focus-trap] {
-    /* Kein visueller Stil nötig; JS übernimmt Fokusverwaltung */
   }
 
   /* ── Reduced Motion ──────────────────────────────────────────────────────── */

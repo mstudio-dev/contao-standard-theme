@@ -1,139 +1,72 @@
 /**
- * 04-utilities.css — Begrenzte Utilities für Redakteure
+ * 04-utilities.css — Utilities für Redakteure
  * Contao Standard Theme
  *
- * Nur Klassen, die im CMS-Backend sinnvoll per "CSS-Klasse" Feld einsetzbar sind.
- * Kein Atomic-CSS; bewusst eingeschränkter Satz.
+ * WICHTIG: Klassen werden in Contao ausschließlich auf den Wrapper-Elementen
+ * gesetzt (CSS-Klasse-Feld bei Inhaltselementen und Modulen), z.B.:
+ *
+ *   <div class="content-text meine-klasse block">
+ *     <p>Inhalt</p>       ← nicht direkt zugänglich
+ *   </div>
+ *
+ * Konsequenzen:
+ *   - Vererbbare Eigenschaften (color, font-*, text-align, line-height)
+ *     wirken automatisch auf Kindelemente — direkte Selektoren genügen.
+ *   - Nicht-vererbbare Eigenschaften (border-radius, max-width auf Bilder,
+ *     overflow) brauchen Descendant-Selektoren.
+ *   - Layout-Utilities (display: flex/grid) auf dem Wrapper können die
+ *     interne Struktur des Inhaltselements brechen — nur mit Bedacht nutzen.
  */
 
 @layer utilities {
 
-  /* ── Text-Ausrichtung ────────────────────────────────────────────────────── */
+  /* ── Text-Ausrichtung (vererbt) ──────────────────────────────────────────── */
 
   .text-left   { text-align: left; }
   .text-center { text-align: center; }
   .text-right  { text-align: right; }
 
-  /* ── Text-Größen ─────────────────────────────────────────────────────────── */
+  /* ── Text-Größe (vererbt) ────────────────────────────────────────────────── */
 
-  .text-sm  { font-size: var(--font-size-sm); }
-  .text-lg  { font-size: var(--font-size-lg); }
-  .text-xl  { font-size: var(--font-size-xl); }
+  .text-sm { font-size: var(--font-size-sm); }
+  .text-lg { font-size: var(--font-size-lg); }
+  .text-xl { font-size: var(--font-size-xl); }
 
-  /* ── Text-Gewicht ────────────────────────────────────────────────────────── */
+  /* ── Text-Gewicht (vererbt) ──────────────────────────────────────────────── */
 
   .font-medium   { font-weight: var(--font-weight-medium); }
   .font-semibold { font-weight: var(--font-weight-semibold); }
   .font-bold     { font-weight: var(--font-weight-bold); }
 
-  /* ── Farben ──────────────────────────────────────────────────────────────── */
+  /* ── Farben (vererbt) ────────────────────────────────────────────────────── */
 
   .text-primary   { color: var(--color-primary); }
   .text-secondary { color: var(--color-secondary); }
   .text-muted     { color: oklch(from var(--color-on-surface) calc(l + 0.30) c h); }
-  .text-error     { color: var(--color-error-on); }
-  .text-success   { color: var(--color-success-on); }
 
-  /* ── Abstände (Margin) ───────────────────────────────────────────────────── */
+  /* ── Lead-Text: Einstiegsabsatz hervorheben ──────────────────────────────── */
+  /* font-size wird vererbt; line-height ebenfalls → wirkt auf alle p-Tags      */
+
+  .lead {
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+  }
+
+  /* ── Abstände (Margin auf dem Wrapper) ───────────────────────────────────── */
 
   .mt-0 { margin-block-start: 0; }
-  .mt-2 { margin-block-start: var(--space-2); }
   .mt-4 { margin-block-start: var(--space-4); }
   .mt-8 { margin-block-start: var(--space-8); }
 
   .mb-0 { margin-block-end: 0; }
-  .mb-2 { margin-block-end: var(--space-2); }
   .mb-4 { margin-block-end: var(--space-4); }
   .mb-8 { margin-block-end: var(--space-8); }
 
-  /* ── Abstände (Padding) ──────────────────────────────────────────────────── */
+  .section-gap    { margin-block: var(--space-12); }
+  .section-gap-sm { margin-block: var(--space-6); }
 
-  .p-4 { padding: var(--space-4); }
-  .p-8 { padding: var(--space-8); }
+  /* ── Hervorgehobene Box (Hintergrund + Rahmen auf dem Wrapper) ───────────── */
 
-  .px-4 { padding-inline: var(--space-4); }
-  .py-4 { padding-block: var(--space-4); }
-
-  /* ── Anzeige ─────────────────────────────────────────────────────────────── */
-
-  .block  { display: block; }
-  .flex   { display: flex; }
-  .grid   { display: grid; }
-  .hidden { display: none; }
-
-  @media (min-width: 768px) {
-    .hidden-md-up  { display: none; }
-    .visible-md-up { display: block; }
-  }
-
-  @media (max-width: 767.98px) {
-    .hidden-sm     { display: none; }
-    .visible-sm    { display: block; }
-  }
-
-  /* ── Flexbox-Helfer ──────────────────────────────────────────────────────── */
-
-  .flex-center  { display: flex; align-items: center; justify-content: center; }
-  .flex-between { display: flex; align-items: center; justify-content: space-between; }
-  .flex-col     { display: flex; flex-direction: column; }
-  .gap-2        { gap: var(--space-2); }
-  .gap-4        { gap: var(--space-4); }
-  .gap-6        { gap: var(--space-6); }
-
-  /* ── Breiten ─────────────────────────────────────────────────────────────── */
-
-  .w-full  { width: 100%; }
-  .w-half  { width: 50%; }
-  .max-w-prose { max-width: 72ch; }
-
-  /* ── Bilder ──────────────────────────────────────────────────────────────── */
-
-  .img-fluid {
-    max-width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  .img-cover {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .img-rounded { border-radius: var(--radius-lg); }
-
-  /* ── Hintergründe ────────────────────────────────────────────────────────── */
-
-  .bg-surface         { background: var(--color-surface); }
-  .bg-surface-variant { background: var(--color-surface-variant); }
-  .bg-primary         { background: var(--color-primary); color: var(--color-on-primary); }
-
-  /* ── Rahmen ──────────────────────────────────────────────────────────────── */
-
-  .border         { border: 1px solid var(--color-border); }
-  .border-top     { border-block-start: 1px solid var(--color-border); }
-  .border-bottom  { border-block-end: 1px solid var(--color-border); }
-  .rounded        { border-radius: var(--radius); }
-  .rounded-lg     { border-radius: var(--radius-lg); }
-  .rounded-full   { border-radius: var(--radius-full); }
-
-  /* ── Schatten ────────────────────────────────────────────────────────────── */
-
-  .shadow     { box-shadow: var(--shadow); }
-  .shadow-md  { box-shadow: var(--shadow-md); }
-  .shadow-lg  { box-shadow: var(--shadow-lg); }
-  .no-shadow  { box-shadow: none; }
-
-  /* ── Sonderklassen für Redakteure ────────────────────────────────────────── */
-
-  /* Lead-Text (größerer Einstiegstext) */
-  .lead {
-    font-size: var(--font-size-lg);
-    line-height: var(--line-height-relaxed);
-    color: oklch(from var(--color-on-surface) calc(l + 0.15) c h);
-  }
-
-  /* Hervorgehobene Box */
   .highlight-box {
     background: var(--color-surface-variant);
     border: 1px solid var(--color-border);
@@ -141,46 +74,70 @@
     padding: var(--space-6);
   }
 
-  /* Zitat-Block */
+  /* ── Callout (farbiger linker Rand auf dem Wrapper) ─────────────────────── */
+
   .callout {
-    background: oklch(from var(--color-primary) l c h / 0.08);
+    background: oklch(from var(--color-primary) l c h / 0.07);
     border-inline-start: 4px solid var(--color-primary);
     border-radius: 0 var(--radius-md) var(--radius-md) 0;
     padding: var(--space-4) var(--space-6);
-    margin-block: var(--space-4);
   }
 
-  /* Trennlinie mit Label */
-  .divider {
-    display: flex;
-    align-items: center;
-    gap: var(--space-4);
-    margin-block: var(--space-6);
+  /* ── Hintergründe (auf dem Wrapper) ──────────────────────────────────────── */
 
-    &::before,
-    &::after {
-      content: '';
-      flex: 1;
-      border-block-start: 1px solid var(--color-border);
+  .bg-surface         { background: var(--color-surface); }
+  .bg-surface-variant { background: var(--color-surface-variant); }
+  .bg-primary         {
+    background: var(--color-primary);
+    color: var(--color-on-primary); /* vererbt auf Kindelemente */
+  }
+
+  /* ── Rahmen (auf dem Wrapper) ────────────────────────────────────────────── */
+
+  .border        { border: 1px solid var(--color-border); }
+  .border-top    { border-block-start: 1px solid var(--color-border); }
+  .border-bottom { border-block-end: 1px solid var(--color-border); }
+  .rounded       { border-radius: var(--radius); }
+  .rounded-lg    { border-radius: var(--radius-lg); }
+
+  /* ── Schatten (auf dem Wrapper) ──────────────────────────────────────────── */
+
+  .shadow    { box-shadow: var(--shadow); }
+  .shadow-md { box-shadow: var(--shadow-md); }
+
+  /* ── Bilder: Descendant-Selektoren nötig (border-radius nicht vererbt) ───── */
+
+  .img-rounded img {
+    border-radius: var(--radius-lg);
+  }
+
+  .img-fluid img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .img-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Vollbreite: Wrapper + Bild ────────────────────────────────────────────── */
+  .fullwidth {
+    max-width: 100%;
+
+    & img {
+      width: 100%;
+      height: auto;
+      display: block;
     }
   }
 
-  /* Abschnitt mit vertikalem Abstand */
-  .section-gap {
-    margin-block: var(--space-12);
-  }
+  /* ── Sonstiges ───────────────────────────────────────────────────────────── */
 
-  .section-gap-sm {
-    margin-block: var(--space-6);
-  }
-
-  /* Kein Text-Umbruch */
   .nowrap { white-space: nowrap; }
 
-  /* Vollbild-Bild */
-  .fullwidth img { width: 100%; }
-
-  /* Druckunterdrückung */
   .no-print {
     @media print { display: none !important; }
   }

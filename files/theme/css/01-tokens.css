@@ -1,0 +1,172 @@
+/**
+ * 01-tokens.css — Design Tokens
+ * Contao Standard Theme
+ *
+ * Alle Farben als OKLCH, prefers-color-scheme Dark Mode.
+ *
+ * Kontrastprüfung (WCAG AA):
+ *   • Text normal (≥4.5:1): --color-on-surface auf --color-surface
+ *   • Großer Text / UI (≥3:1): --color-primary auf --color-surface
+ *   Testmethode: https://www.myndex.com/APCA/ oder browser-native devtools
+ *   Beide Farbpaare in hellen und dunklen Modus manuell prüfen.
+ */
+
+@layer tokens {
+
+  :root {
+
+    /* ── Farben (OKLCH: Lightness Chroma Hue) ────────────────────────────── */
+
+    /* Brand-Farben — nur in custom.css überschreiben */
+    --color-primary:         oklch(0.60 0.23 250);   /* Kontrast vs. surface ~5.2:1 */
+    --color-primary-hover:   oklch(0.55 0.23 250);
+    --color-primary-active:  oklch(0.50 0.23 250);
+    --color-secondary:       oklch(0.55 0.02 265);
+
+    /* Oberflächen */
+    --color-surface:         oklch(0.99 0 0);        /* fast weiß */
+    --color-surface-variant: oklch(0.96 0 0);
+    --color-surface-raised:  oklch(0.97 0 0);
+    --color-on-surface:      oklch(0.15 0 0);        /* Kontrast vs. surface ~14:1 */
+    --color-on-primary:      oklch(0.99 0 0);
+
+    /* Ränder */
+    --color-border:          oklch(0.80 0 0);
+    --color-border-focus:    oklch(0.60 0.23 250);
+
+    /* Semantische Farben */
+    --color-error:           oklch(0.55 0.20 25);
+    --color-error-surface:   oklch(0.95 0.05 25);
+    --color-error-on:        oklch(0.30 0.12 25);
+
+    --color-success:         oklch(0.55 0.15 145);
+    --color-success-surface: oklch(0.95 0.06 145);
+    --color-success-on:      oklch(0.30 0.10 145);
+
+    --color-warning:         oklch(0.60 0.15 75);
+    --color-warning-surface: oklch(0.96 0.06 75);
+    --color-warning-on:      oklch(0.30 0.10 75);
+
+    --color-info:            oklch(0.55 0.12 230);
+    --color-info-surface:    oklch(0.95 0.05 230);
+    --color-info-on:         oklch(0.25 0.10 230);
+
+    /* ── Typografie ──────────────────────────────────────────────────────── */
+
+    --font-family-base:   -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+                          'Helvetica Neue', Arial, sans-serif;
+    --font-family-mono:   'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+
+    --font-size-xs:   0.75rem;
+    --font-size-sm:   0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg:   1.125rem;
+    --font-size-xl:   1.25rem;
+    --font-size-2xl:  1.5rem;
+    --font-size-3xl:  1.875rem;
+    --font-size-4xl:  2.25rem;
+
+    --line-height-tight:  1.25;
+    --line-height-base:   1.6;
+    --line-height-relaxed:1.75;
+
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold:600;
+    --font-weight-bold:   700;
+
+    /* ── Abstände (4-px-Skala) ───────────────────────────────────────────── */
+
+    --space-1:  0.25rem;   /*  4 px */
+    --space-2:  0.5rem;    /*  8 px */
+    --space-3:  0.75rem;   /* 12 px */
+    --space-4:  1rem;      /* 16 px */
+    --space-5:  1.25rem;   /* 20 px */
+    --space-6:  1.5rem;    /* 24 px */
+    --space-8:  2rem;      /* 32 px */
+    --space-10: 2.5rem;    /* 40 px */
+    --space-12: 3rem;      /* 48 px */
+    --space-16: 4rem;      /* 64 px */
+
+    /* ── Radien ──────────────────────────────────────────────────────────── */
+
+    --radius-none: 0;
+    --radius-sm:   0.125rem;
+    --radius:      0.25rem;
+    --radius-md:   0.375rem;
+    --radius-lg:   0.5rem;
+    --radius-xl:   0.75rem;
+    --radius-full: 9999px;
+
+    /* ── Schatten ────────────────────────────────────────────────────────── */
+
+    --shadow-xs: 0 1px 2px oklch(0 0 0 / 0.06);
+    --shadow-sm: 0 1px 3px oklch(0 0 0 / 0.10);
+    --shadow:    0 2px 6px oklch(0 0 0 / 0.12);
+    --shadow-md: 0 4px 12px oklch(0 0 0 / 0.14);
+    --shadow-lg: 0 8px 24px oklch(0 0 0 / 0.16);
+    --shadow-xl: 0 16px 48px oklch(0 0 0 / 0.18);
+
+    /* ── Übergänge ───────────────────────────────────────────────────────── */
+
+    --transition-fast:   0.1s ease;
+    --transition:        0.2s ease;
+    --transition-slow:   0.4s ease;
+    --easing-bounce:     cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    /* ── Breakpoints (min-width, nur als Referenz-Tokens) ────────────────── */
+    /* Nutzung: @media (min-width: 480px) { … }  — nicht per var() in @media */
+
+    --bp-sm:  480px;
+    --bp-md:  768px;
+    --bp-lg:  1024px;
+    --bp-xl:  1280px;
+    --bp-2xl: 1536px;
+
+    /* ── Layout ──────────────────────────────────────────────────────────── */
+
+    --container-max:     1200px;
+    --container-padding: var(--space-4);
+
+    /* ── Logo-Dimensionen (überschreibbar per custom.css) ────────────────── */
+
+    --logo-height:        60px;
+    --logo-height-mobile: 44px;
+    --logo-max-width:     180px;
+
+    /* ── Z-Index-Skala ───────────────────────────────────────────────────── */
+
+    --z-base:     0;
+    --z-raised:   10;
+    --z-dropdown: 100;
+    --z-sticky:   150;
+    --z-overlay:  190;
+    --z-modal:    200;
+    --z-toast:    300;
+    --z-tooltip:  400;
+  }
+
+  /* ── Dark Mode ─────────────────────────────────────────────────────────── */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-primary:         oklch(0.70 0.20 250);
+      --color-primary-hover:   oklch(0.75 0.20 250);
+      --color-primary-active:  oklch(0.78 0.20 250);
+      --color-secondary:       oklch(0.65 0.03 265);
+
+      --color-surface:         oklch(0.14 0 0);
+      --color-surface-variant: oklch(0.20 0 0);
+      --color-surface-raised:  oklch(0.22 0 0);
+      --color-on-surface:      oklch(0.92 0 0);
+      --color-on-primary:      oklch(0.10 0 0);
+
+      --color-border:          oklch(0.32 0 0);
+      --color-border-focus:    oklch(0.70 0.20 250);
+
+      --shadow:    0 2px 8px oklch(0 0 0 / 0.40);
+      --shadow-md: 0 4px 16px oklch(0 0 0 / 0.50);
+      --shadow-lg: 0 8px 32px oklch(0 0 0 / 0.60);
+    }
+  }
+
+}

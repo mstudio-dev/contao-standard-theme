@@ -1,0 +1,151 @@
+{#
+  templates/content_element/ce_text_variants.html.twig
+  Contao Standard Theme — Beispiel-Snippets für Text-Inhaltselemente
+
+  NUTZUNG:
+  Dieses Template ist eine Referenz-Vorlage und kein direktes CE-Override.
+  Kopiere Abschnitte in dein Projekt-Template oder nutze CSS-Klassen
+  direkt über das "CSS-Klasse"-Feld im Backend.
+
+  Erlaubte Redakteurs-Klassen (CSS-Klasse Feld im Inhaltselement):
+    Text:      lead · text-center · text-right · highlight-box · callout
+    Abstände:  mt-8 · mb-0 · section-gap · section-gap-sm
+    Bilder:    img-rounded · img-fluid
+    Layout:    row (mit verschachtelten Spalten-Elementen)
+
+  ACCESSIBILITY-CHECKLIST Textelement:
+    ✓ Überschriften-Hierarchie prüfen (h1 → h2 → h3, keine Ebenen überspringen)
+    ✓ Links haben aussagekräftigen Text (nicht "Hier klicken")
+    ✓ Bilder haben Alt-Text (leer lassen für dekorative Bilder)
+    ✓ Kontrast: #on-surface auf #surface ≥4.5:1 (prüfe nach Token-Änderung)
+#}
+
+{# ═══════════════════════════════════════════════════════════════════════════ #}
+{# SNIPPET A: Lead-Text (erster Absatz hervorgehoben)                         #}
+{# CSS-Klasse im Backend: lead                                                 #}
+{# ═══════════════════════════════════════════════════════════════════════════ #}
+{#
+<div class="content-text lead">
+    <p>Einleitungstext mit größerer Schrift und erhöhtem Zeilenabstand.</p>
+</div>
+#}
+
+{# ═══════════════════════════════════════════════════════════════════════════ #}
+{# SNIPPET B: Hervorgehobene Box                                               #}
+{# CSS-Klasse im Backend: highlight-box                                        #}
+{# ═══════════════════════════════════════════════════════════════════════════ #}
+{#
+<div class="content-text highlight-box">
+    <p>Wichtiger Hinweis oder Infobox mit grauem Hintergrund und Rahmen.</p>
+</div>
+#}
+
+{# ═══════════════════════════════════════════════════════════════════════════ #}
+{# SNIPPET C: Zitat-Callout mit Primärfarb-Akzent                             #}
+{# CSS-Klasse im Backend: callout                                              #}
+{# ═══════════════════════════════════════════════════════════════════════════ #}
+{#
+<div class="content-text callout">
+    <p>„Hervorgehobenes Zitat oder wichtiger Hinweis mit farbigem linken Rand."</p>
+</div>
+#}
+
+{# ═══════════════════════════════════════════════════════════════════════════ #}
+{# SNIPPET D: Zweispaltiges Layout (je ein Textelement in Spalte)             #}
+{# Wrapper-Element CSS-Klasse: row                                             #}
+{# Kinder CSS-Klasse: col--6                                                   #}
+{# ═══════════════════════════════════════════════════════════════════════════ #}
+{#
+<div class="row">
+    <div class="col--6 content-text">
+        <h3>Linke Spalte</h3>
+        <p>Inhalt links …</p>
+    </div>
+    <div class="col--6 content-text">
+        <h3>Rechte Spalte</h3>
+        <p>Inhalt rechts …</p>
+    </div>
+</div>
+#}
+
+{# ═══════════════════════════════════════════════════════════════════════════ #}
+{# SNIPPET E: Card-Grid (3 Karten nebeneinander ab 768px)                     #}
+{# CSS-Klasse auf umgebenden Artikel oder Wrapper: card-grid                  #}
+{# ═══════════════════════════════════════════════════════════════════════════ #}
+{#
+<div class="card-grid">
+    <article class="card">
+        <div class="card__body">
+            <h3 class="card__title">Karte 1</h3>
+            <p class="card__text">Beschreibungstext …</p>
+        </div>
+        <div class="card__footer">
+            <a href="#" class="btn btn--primary btn--sm">Mehr erfahren</a>
+        </div>
+    </article>
+    <article class="card">
+        <div class="card__body">
+            <h3 class="card__title">Karte 2</h3>
+            <p class="card__text">Beschreibungstext …</p>
+        </div>
+        <div class="card__footer">
+            <a href="#" class="btn btn--secondary btn--sm">Mehr erfahren</a>
+        </div>
+    </article>
+</div>
+#}
+
+{# ═══════════════════════════════════════════════════════════════════════════ #}
+{# SNIPPET F: Icon-Nutzung im Text                                             #}
+{# ═══════════════════════════════════════════════════════════════════════════ #}
+{#
+<!-- Dekoratives Icon (wird von Screen-Readern ignoriert) -->
+<svg aria-hidden="true" focusable="false" width="20" height="20">
+    <use href="{{ asset('files/theme/img/sprite.svg') }}#icon-home"/>
+</svg>
+
+<!-- Informatives Icon (mit Titel für Screen-Reader) -->
+<svg role="img" aria-labelledby="icon-download-label" width="20" height="20">
+    <title id="icon-download-label">Datei herunterladen</title>
+    <use href="{{ asset('files/theme/img/sprite.svg') }}#icon-download"/>
+</svg>
+#}
+
+{# ═══════════════════════════════════════════════════════════════════════════ #}
+{# SNIPPET G: Buttons (als Link-Element im CMS eintragen)                     #}
+{# ═══════════════════════════════════════════════════════════════════════════ #}
+{#
+<a href="/kontakt" class="btn btn--primary">Kontakt aufnehmen</a>
+<a href="/mehr" class="btn btn--secondary">Mehr erfahren</a>
+<a href="/download.pdf" class="btn btn--ghost">
+    <svg aria-hidden="true" focusable="false" width="16" height="16">
+        <use href="{{ asset('files/theme/img/sprite.svg') }}#icon-download"/>
+    </svg>
+    PDF herunterladen
+</a>
+#}
+
+{# ═══════════════════════════════════════════════════════════════════════════ #}
+{# SNIPPET H: Alert/Info-Box (als HTML-Element im Redakteur)                  #}
+{# ═══════════════════════════════════════════════════════════════════════════ #}
+{#
+<div class="alert alert--info" role="note">
+    <svg class="alert__icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24">
+        <use href="{{ asset('files/theme/img/sprite.svg') }}#icon-info"/>
+    </svg>
+    <div>
+        <p class="alert__title">Hinweis</p>
+        <p>Wichtige Information für Besucher.</p>
+    </div>
+</div>
+
+<div class="alert alert--warning" role="note">
+    <svg class="alert__icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24">
+        <use href="{{ asset('files/theme/img/sprite.svg') }}#icon-warning"/>
+    </svg>
+    <div>
+        <p class="alert__title">Achtung</p>
+        <p>Warnung oder wichtiger Hinweis.</p>
+    </div>
+</div>
+#}

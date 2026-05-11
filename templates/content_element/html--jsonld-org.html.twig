@@ -1,0 +1,38 @@
+{#
+  templates/content_element/html--jsonld-org.html.twig
+  Contao Standard Theme — JSON-LD Organization (Structured Data)
+
+  Slot: head_meta
+  Backend: Design → Theme → Inhaltselemente → Neu → Typ HTML
+           → Template "html--jsonld-org" → Slot "head_meta" zuweisen
+
+  Werte anpassen:
+    - name, url, logo, contactPoint, sameAs (Social-Media-URLs)
+  Validierung: https://validator.schema.org/
+#}
+{% extends "@Contao/content_element/html.html.twig" %}
+
+{% block html %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Firmenname",
+  "url": "{{ app.request.schemeAndHttpHost }}",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "{{ app.request.schemeAndHttpHost ~ asset('files/theme/img/logo.svg') }}"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+49-000-000000",
+    "contactType": "customer service",
+    "availableLanguage": "German"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/company/firmenname",
+    "https://www.instagram.com/firmenname"
+  ]
+}
+</script>
+{% endblock %}

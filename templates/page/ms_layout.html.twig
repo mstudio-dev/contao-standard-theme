@@ -1,0 +1,111 @@
+{#
+  templates/page/ms_layout.html.twig
+  Contao Standard Theme — Page Layout
+
+  Extends @Contao/page/layout.html.twig.
+
+  Slots im <head>:
+    head_meta  → JSON-LD, Custom Meta, Analytics-Head-Snippets
+  Slots im <body>:
+    header, before, left, main, right, after, footer  → Layout-Sektionen
+    body_end   → deferred JS, Analytics-Body-Snippets (z.B. GTM noscript)
+
+  CSS-Ladereihenfolge (Infrastruktur, bleibt hardcodiert):
+    01-tokens → 02-framework → 03-components → 04-utilities → 05-accessibility → custom.css
+
+  Template im Backend: Layout → Seitenlayout → Template → "ms_layout"
+#}
+
+{% extends '@Contao/page/layout.html.twig' %}
+
+{# ── <head>: CSS-Infrastruktur + head_meta Slot ────────────────────────────── #}
+{% block end_of_head %}
+    {{ parent() }}
+
+    {# SVG-Sprite vorladen #}
+    <link rel="preload" href="{{ asset('files/theme/img/sprite.svg') }}" as="image" type="image/svg+xml">
+
+    {# CSS — Ladereihenfolge ist Infrastruktur, nicht per Slot steuerbar #}
+    <link rel="stylesheet" href="{{ asset('files/theme/css/01-tokens.css') }}">
+    <link rel="stylesheet" href="{{ asset('files/theme/css/02-framework.css') }}">
+    <link rel="stylesheet" href="{{ asset('files/theme/css/03-components.css') }}">
+    <link rel="stylesheet" href="{{ asset('files/theme/css/04-utilities.css') }}">
+    <link rel="stylesheet" href="{{ asset('files/theme/css/05-accessibility.css') }}">
+    <link rel="stylesheet" href="{{ asset('files/theme/css/custom.css') }}">
+
+    {# head_meta: JSON-LD, Open Graph Ergänzungen, Analytics-Head, Custom Meta #}
+    {# Befüllung über Theme-Inhaltselemente im Backend:                         #}
+    {# Design → Theme → Inhaltselemente → Typ HTML → Template "html--jsonld-*"  #}
+    {% slot head_meta %}{% endslot %}
+{% endblock %}
+
+{# ── <body>: Seitenstruktur ────────────────────────────────────────────────── #}
+{% block body_content %}
+
+    <div id="wrapper">
+
+        {% slot header %}
+            <header id="header" role="banner">
+                <div class="inside">{{ slot() }}</div>
+            </header>
+        {% endslot %}
+
+        {% slot before %}
+            {% if slot.hasContent() %}
+                <div id="before">
+                    <div class="inside">{{ slot() }}</div>
+                </div>
+            {% endif %}
+        {% endslot %}
+
+        <div id="container">
+
+            {% slot left %}
+                {% if slot.hasContent() %}
+                    <aside id="left" aria-label="{{ 'Linke Sidebar'|trans }}">
+                        <div class="inside">{{ slot() }}</div>
+                    </aside>
+                {% endif %}
+            {% endslot %}
+
+            {% slot main %}
+                <main id="main" aria-label="{{ 'Hauptinhalt'|trans }}">
+                    <div class="inside">{{ slot() }}</div>
+                </main>
+            {% endslot %}
+
+            {% slot right %}
+                {% if slot.hasContent() %}
+                    <aside id="right" aria-label="{{ 'Rechte Sidebar'|trans }}">
+                        <div class="inside">{{ slot() }}</div>
+                    </aside>
+                {% endif %}
+            {% endslot %}
+
+        </div>{# /container #}
+
+        {% slot after %}
+            {% if slot.hasContent() %}
+                <div id="after">
+                    <div class="inside">{{ slot() }}</div>
+                </div>
+            {% endif %}
+        {% endslot %}
+
+        {% slot footer %}
+            <footer id="footer" role="contentinfo">
+                <div class="inside">{{ slot() }}</div>
+            </footer>
+        {% endslot %}
+
+    </div>{# /wrapper #}
+
+{% endblock %}
+
+{# ── vor </body>: deferred JS, Analytics-Body ──────────────────────────────── #}
+{# body_end: Theme-Inhaltselemente für GTM noscript, Cookie-JS, Theme-JS       #}
+{# Design → Theme → Inhaltselemente → Typ HTML → Template "html--gtm-body" etc.#}
+{% block end_of_body %}
+    {{ parent() }}
+    {% slot body_end %}{% endslot %}
+{% endblock %}

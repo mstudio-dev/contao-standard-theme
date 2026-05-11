@@ -1,0 +1,19 @@
+{#
+  templates/content_element/html--gtm-body.html.twig
+  Contao Standard Theme — Google Tag Manager (noscript-Teil für <body>)
+
+  Slot: body_end
+  Backend: Design → Theme → Inhaltselemente → Neu → Typ HTML
+           → Template "html--gtm-body" → Slot "body_end" zuweisen
+
+  GTM-ID ersetzen: GTM-XXXXXXX
+  Companion: html--gtm-head (Script) → Slot "head_meta" zuweisen
+#}
+{% extends "@Contao/content_element/html.html.twig" %}
+
+{% block html %}
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+{% endblock %}

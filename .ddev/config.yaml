@@ -1,0 +1,16 @@
+name: contao-standard-theme
+type: php
+docroot: public
+php_version: "8.4"
+webserver_type: apache-fpm
+xdebug_enabled: false
+additional_hostnames: []
+additional_fqdns: []
+database:
+    type: mariadb
+    version: "11.8"
+use_dns_when_possible: true
+composer_version: "2"
+web_environment:
+    - DATABASE_URL=mysql://db:db@db:3306/db?serverVersion=mariadb-11.8.0&charset=utf8mb4
+corepack_enable: false

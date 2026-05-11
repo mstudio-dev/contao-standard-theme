@@ -1,0 +1,79 @@
+/**
+ * custom.css — Brand- und Projekt-Anpassungen
+ * Contao Standard Theme
+ *
+ * ╔══════════════════════════════════════════════════════════════════╗
+ * ║  REGEL: Diese Datei darf NUR :root-Variablen enthalten.         ║
+ * ║  Keine Selektoren, keine Regeln außerhalb von :root.            ║
+ * ║  Alle Layout-/Stil-Änderungen gehören in 03-components.css      ║
+ * ║  oder in eine projekt-spezifische Komponenten-Datei.            ║
+ * ║                                                                  ║
+ * ║  CI-Check: scripts/ci/check-custom-css.sh prüft auf Selektoren. ║
+ * ╚══════════════════════════════════════════════════════════════════╝
+ *
+ * Ladereihenfolge (wird in layout.html.twig bestimmt):
+ *   01-tokens → 02-framework → 03-components → 04-utilities
+ *   → 05-accessibility → custom.css
+ *
+ * Kontrastprüfung:
+ *   Alle Farbpaare prüfen unter https://www.myndex.com/APCA/
+ *   Mindestvorgaben: Text normal ≥4.5:1 · Großtext/UI ≥3:1
+ */
+
+@layer custom {
+
+  :root {
+
+    /* ── Primärfarbe des Projekts ─────────────────────────────────────────── */
+    /* Beispiel: Blau ~5.2:1 Kontrast auf weißem Hintergrund              */
+    /* --color-primary:       oklch(0.60 0.23 250); */
+
+    /* ── Logo-Dimensionen ────────────────────────────────────────────────── */
+    /* --logo-height:         60px;   */
+    /* --logo-height-mobile:  44px;   */
+    /* --logo-max-width:      180px;  */
+
+    /* ── Schrift ──────────────────────────────────────────────────────────── */
+    /* --font-family-base:    'Inter', system-ui, sans-serif; */
+
+    /* ── Container-Breite ─────────────────────────────────────────────────── */
+    /* --container-max:       1200px; */
+
+    /* ── Farb-Overrides (OKLCH) ────────────────────────────────────────────── */
+    /*
+     * OKLCH-Syntax: oklch(Lightness Chroma Hue)
+     *   L: 0–1  (0 = schwarz, 1 = weiß)
+     *   C: 0–0.4 (0 = grau, ~0.3 = sehr satt)
+     *   H: 0–360 (0/360 = rot, 120 = grün, 250 = blau, 300 = violett)
+     *
+     * Empfehlung: Primärfarbe erst im Tool https://oklch.com/#... wählen,
+     * dann Kontrast mit https://www.myndex.com/APCA/ prüfen.
+     *
+     * Beispiel: Grünes Brand
+     * --color-primary:         oklch(0.52 0.18 145);
+     * --color-primary-hover:   oklch(0.47 0.18 145);
+     *
+     * Beispiel: Rotes Brand
+     * --color-primary:         oklch(0.52 0.22 25);
+     * --color-primary-hover:   oklch(0.47 0.22 25);
+     */
+
+    /* ── Radien ───────────────────────────────────────────────────────────── */
+    /* --radius:               0.25rem;  */
+    /* --radius-lg:            0.5rem;   */
+
+    /* ── Schatten ──────────────────────────────────────────────────────────── */
+    /* --shadow:    0 2px 6px oklch(0 0 0 / 0.12); */
+
+    /* ── Swiper-Overrides ─────────────────────────────────────────────────── */
+    /* --swiper-theme-color:   var(--color-primary); */
+  }
+
+  /* Dark-Mode Overrides (nur :root-Variablen!) */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      /* --color-primary: oklch(0.70 0.20 250); */
+    }
+  }
+
+}

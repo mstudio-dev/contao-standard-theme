@@ -1,0 +1,47 @@
+# Configuration
+/.env.local
+
+# Composer
+/vendor/
+
+# Contao Manager
+/contao-manager/
+
+# Generated folders
+/assets/
+/public/
+/system/*
+!/system/config/
+/system/config/localconfig.php
+/var/
+
+# ========================================
+# Custom: Only track specific theme files
+# ========================================
+
+# Ignore all files by default
+/files/*
+/templates/*
+
+# But track our custom theme assets
+!/files/theme/
+/files/theme/*
+!/files/theme/css/
+!/files/theme/css/**
+!/files/theme/js/
+!/files/theme/js/**
+!/files/theme/img/
+!/files/theme/img/**
+!/files/theme/fonts/
+!/files/theme/fonts/**
+
+# And track our custom page templates
+!/templates/page/
+/templates/page/*
+!/templates/page/layout.html.twig
+!/templates/page/ms_layout.html.twig
+
+# And track custom module and content-element templates
+!/templates/mod_article.html.twig
+!/templates/content_element/
+!/templates/content_element/**

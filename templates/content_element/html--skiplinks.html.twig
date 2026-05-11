@@ -1,0 +1,24 @@
+{#
+  templates/content_element/html--skiplinks.html.twig
+  Contao Standard Theme — Skip-Links als Theme-Inhaltselement
+
+  Backend-Einrichtung (einmalig, pro Theme):
+    1. Design → Theme → [Theme-Name] → Inhaltselemente → Neu
+    2. Typ: "HTML"
+    3. Template: "html--skiplinks" wählen
+    4. Speichern
+    5. Layout → Sektionsverwaltung → dieses Element als erstes
+       in der gewünschten Sektion (z.B. "Vor dem Inhalt") eintragen
+
+  Das Element rendert die Skip-Links als erstes fokussierbares Element
+  der Seite (WCAG 2.4.1). Die Ziel-IDs #main und #footer müssen mit
+  den IDs im Page-Layout (ms_layout.html.twig) übereinstimmen.
+#}
+{% extends "@Contao/content_element/html.html.twig" %}
+
+{% block html %}
+<nav class="skip-links" aria-label="Schnellzugriff">
+    <a class="skip-link" href="#main">Zum Hauptinhalt</a>
+    <a class="skip-link" href="#footer">Zum Seitenende</a>
+</nav>
+{% endblock %}
